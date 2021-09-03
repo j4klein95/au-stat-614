@@ -1,7 +1,7 @@
 ---
-title: "HW1 - 614"
-author: "Jared 'Jay' Klein"
-date: "8/31/2021"
+title: "HW1-Khairiya-Jay"
+author: "Khairiya Eidan, Jared 'Jay' Klein"
+date: "9/3/2021"
 output: word_document
 ---
 
@@ -17,58 +17,47 @@ print(round(desired_value, digits = 2))
 ```
 3)  Use and show R code to produce all even integers greater than 7 but less than 101.
 ```{r}
-c <- vector()
-for (variable in 8:100) {
-  if (variable %% 2 == 0) {
-    c <- append(c, variable)
-  }
-}
-
-print(c)
+seq(8,100,2)
 ```
 4)  Use and show R code to find the mean of all positive integers less than 100.
 ```{r}
-another_c <- vector()
-for (i in 0:99) {
-  another_c <- append(another_c, i)
-}
-
-print(mean(another_c))
+E <- seq(0,99,2)
+mean(E)
 ```
-
 ```{r}
-help("seq")
+new_E <- c(0:99)
+mean(new_E)
 ```
 
 5) For the given data set below, Use and show R code to create a vector and assign the vector to variable,{10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59}
 ```{r}
-mommys_favorite_vector <- c(10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59)
+q5_vector <- c(10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59)
 ```
 5a)  Use and show R code to find the median for the data set.
 ```{r}
-median(mommys_favorite_vector)
+median(q5_vector)
 ```
 5b) Use and show R code to produce a boxplot for the data set.
 ```{r}
-boxplot(mommys_favorite_vector)
+boxplot(q5_vector)
 ```
 5c) Use and show R code to find the mean, median, maximum, minimum, 1stquartile and the 3rd quartile for the data set.
 ```{r}
-summary(mommys_favorite_vector)
+summary(q5_vector)
 ```
 5d) Use and show R code to produce a histogram. 
 ```{r}
-hist(mommys_favorite_vector)
+hist(q5_vector)
 ```
 Data is skewed to the left. 
 
-6) This is a long question so I won't copy paste here. 
+6 Use and show R code to produce a scatter plot for the following bivariable data set.  
+Let Credit Score be the independent values x and Interest Rate be the dependent values y.
 ```{r}
-my_credit_score_is_better_than_these_not_bragging <- c(545, 595, 640, 675, 705, 750)
+X <- c(545,595,640,675,705,750)
+Y <- c(18.982,17.976,12.218,8.612,6.680,5.150)
 
-interest_rates_i_never_understand <- c(18.982, 17.976, 12.218, 8.612, 6.680, 5.150)
-
-plot(my_credit_score_is_better_than_these_not_bragging, interest_rates_i_never_understand)
+plot(X,Y)
 ```
-
-
+Does your scatter plot suggest a positive or a negative association between the variables?
+It suggests a negative association.

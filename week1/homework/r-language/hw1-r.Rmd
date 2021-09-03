@@ -13,7 +13,7 @@ print(desired_value)
 
 2)  Use and show R code to round your answer from number 1 to the nearest hundredth.
 ```{r}
-print(round(desired_value, digits = 3))
+print(round(desired_value, digits = 2))
 ```
 3)  Use and show R code to produce all even integers greater than 7 but less than 101.
 ```{r}
@@ -35,9 +35,14 @@ for (i in 0:99) {
 
 print(mean(another_c))
 ```
+
+```{r}
+help("seq")
+```
+
 5) For the given data set below, Use and show R code to create a vector and assign the vector to variable,{10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59}
 ```{r}
-mommys_favorite_vector <- c(0, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59)
+mommys_favorite_vector <- c(10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59)
 ```
 5a)  Use and show R code to find the median for the data set.
 ```{r}
@@ -55,7 +60,7 @@ summary(mommys_favorite_vector)
 ```{r}
 hist(mommys_favorite_vector)
 ```
-Data is skewed to the right. 
+Data is skewed to the left. 
 
 6) This is a long question so I won't copy paste here. 
 ```{r}

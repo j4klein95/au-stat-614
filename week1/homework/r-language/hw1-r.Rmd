@@ -7,13 +7,13 @@ output: word_document
 
 1)  Use and show R code to evaluate the following expression:[ln(120)]^3 -  π
 ```{r}
-desired_value <- (abs(log(120))^3) - pi
+desired_value <- (log(120))^3-pi
 print(desired_value)
 ```
 
 2)  Use and show R code to round your answer from number 1 to the nearest hundredth.
 ```{r}
-print(round(desired_value, digits = 2))
+round(desired_value, digits = 2)
 ```
 3)  Use and show R code to produce all even integers greater than 7 but less than 101.
 ```{r}
@@ -21,12 +21,8 @@ seq(8,100,2)
 ```
 4)  Use and show R code to find the mean of all positive integers less than 100.
 ```{r}
-E <- seq(0,99,2)
+E <- c(0:99)
 mean(E)
-```
-```{r}
-new_E <- c(0:99)
-mean(new_E)
 ```
 
 5) For the given data set below, Use and show R code to create a vector and assign the vector to variable,{10, 22, 24, 34, 35, 39, 41, 43, 44, 45.5, 47, 51, 53, 54.5, 55, 56.75, 58, 58.3, 59, 59}

@@ -7,7 +7,7 @@ output: word_document
 
 1)  Use and show R code to evaluate the following expression:[ln(120)]^3 -  π
 ```{r}
-desired_value <- (log(120))^3-pi
+desired_value <- ((log(120))^3)-pi
 print(desired_value)
 ```
 

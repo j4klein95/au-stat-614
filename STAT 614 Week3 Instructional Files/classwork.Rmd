@@ -1,0 +1,94 @@
+---
+title: "Classwork - Ch 3"
+author: "Jared 'Jay' Klein"
+date: "9/15/2021"
+output: word_document
+---
+
+Use the following to answer questions 1–4:
+
+The Insurance Institute for Highway Safety publishes data on the total damage suffered by compact automobiles in a series of controlled, low-speed collisions. The cost for a sample of 9 cars, in hundreds of dollars, is provided below:
+
+10	6	8	10	4	3.5	7.5	8	9
+
+```{r}
+r <- c(10, 6, 8, 10, 4, 3.5, 7.5, 8, 9)
+```
+
+
+1.	What is the median cost of the total damage suffered for this sample of cars?
+A)	$400	C)	$800*
+B)	$730	D)	$1000
+Answer:	
+```{r}
+median(r)
+```
+
+2.	What is the first quartile for the above data?
+A)	$350	C)	$600*
+B)	$500	D)	$800
+Answer:	
+```{r}
+summary(r)
+```
+
+3..	What is the interquartile range of the above data?
+A)	$300*	C)	$400
+B)	$350	D)	$450
+Answer:	
+```{r}
+IQR(r)
+```
+	
+4.	What is the mean of the total damage suffered for this sample of cars?
+A)	$239
+B)	$733*
+C)	$800
+D)	$950
+Answer:	
+```{r}
+mean(r)
+```
+
+
+The Michigan Department of Transportation (M-DOT) is working on a major project: 80% of the highways in Michigan need to be repaved. To speed completion of this project, many contractors will be working for M-DOT. Contractors are currently bidding on the next part of the project. To help make a decision about which contractor to hire, M-DOT collects many variables besides just the estimated cost. One of those variables is the contractor’s estimate of the number of workdays required to finish the job. Twenty contractors have bid on the next job. The boxplot below represents their estimates of the number of work days required:
+
+ 
+5.	What is (approximately) the interquartile range, based on the boxplot?
+A)	140 days
+B)	270 days*
+C)	360 days
+D)	760 days
+Answer:	
+
+6.	Determine whether each of the following statements is true or false.
+A)	The median number of days is approximately 180.
+B)	The minimum number of days is approximately 40.
+C)	The maximum number of days is approximately 750.
+D)	Twenty-five percent of contractors estimated the number of days to be more than 100.
+Answer:	A)  True              B) True          C) False       D) False 
+	
+
+
+7)  A data set is normally distributed and has a mean of 25 and a standard deviation of 5.  (Show and use the R code needed for each answer)
+ a)  Find the percentage of the data that is greater than 20.
+```{r}
+pnorm(q=20, mean=25, sd=5)
+```
+ 
+ b)  Find the percentage of the data that is between 14 and 27.
+```{r}
+(pnorm(q=27, mean=25, sd=5) 
+  - pnorm(q=14, mean=25, sd=5))
+```
+ 
+ c)  Find the 91st percentile
+```{r}
+qnorm(p=.91, mean=25, sd=5)
+```
+ 
+ d)  Find the median
+```{r}
+median(rnorm(n=1000, mean = 25, sd=5))
+```
+ Also mean = median of normally distributed dataset so median = 25

@@ -134,3 +134,4 @@ dmypy.json
 non-code-related/
 *.docx
 *.doc
+*.pdf

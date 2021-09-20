@@ -7,13 +7,12 @@ x
 hist(x)
 
 # skewed left or skewed right ?
-
-# mewn < median ,  mean > median  or  mean = median
+# skewed left = mewn < median ,  skewed right = mean > median  or  mean = median
 
 #Boxplots
 
 boxplot(x)
-# any outliers ?   yes    no
+# any outliers ?   *yes    no
 
 boxplot(x, horizontal = TRUE)
 
@@ -29,9 +28,9 @@ y
 # Histograms
 
 hist(y)
-# skewed left or skewed right ?
+# skewed left or *skewed right ?
 
-# mean < median , mean > median  or  mean = median
+# mean < median , *mean > median  or  mean = median
 
 hist(y,  col = c("red"))
 
@@ -41,7 +40,7 @@ hist(y,  col = c("red", "blue"))
 
 boxplot(y)
 
-# any outliers ?   yes    no
+# any outliers ?   *yes    no
 
 boxplot(y, horizontal = TRUE)
 
@@ -52,13 +51,13 @@ z
 
 hist(z)
 
-# skewed left , skewed right or normal ?
+# skewed left , skewed right or *normal ?
 
-# mewn < median  ,  mean > median  or  mean = median
+# mewn < median  ,  mean > median  or  *mean = median
 
 boxplot(z)
 
-# any outliers ?   yes    no
+# any outliers ?   *yes    no
 
 
 # Quartiles, Percentiles, IQR
@@ -71,19 +70,24 @@ x
 # Median for data set x
 
 summary(x)
+# min 20, max 60, 1st q 43, 3rd q 55, median 48
 
 boxplot(x)
 
 # Find the range of the data set (Max - Min)
   range(x)
+  # 20 - 60 so a diff of 40
+  
 # Find the IQR  (Inter Quartile Range)   Q3 - Q1  
 # Use IQR to summarize skewed data
   
   IQR(x)
+  # output says 12
   
 # Find the standard deviation  (typical distance between 
 # the mean and another data value of the set)
   sd(x)
+  #11.739
 
 # Scatter Plots  (Tidyverse Methods and Base R Methods)
 # install.packages("tidyverse)
@@ -128,6 +132,8 @@ View(mpg)
   ?diamonds
   View(diamonds)
   
+  nrow(diamonds)
+  dim(diamonds)
   
   # Old base R method
   

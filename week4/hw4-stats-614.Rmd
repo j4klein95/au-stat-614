@@ -1,0 +1,134 @@
+---
+title: "Homework - 4"
+author: "Jared 'Jay' Klein and Khairiya Ehran"
+date: "9/20/2021"
+output: word_document
+---
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(glue)
+```
+```{r}
+?midwest
+```
+
+1) How many rows and columns does the midwest data frame have?
+```{r}
+num_rows <- nrow(midwest)
+num_cols <- ncol(midwest)
+
+glue("There are {num_rows} rows and {num_cols} columns in the midwest dataset.")
+```
+There are 437 rows and 28 columns in the midwest dataset.
+
+2) Name three variables of the midwest data frame that are categorical
+```{r}
+library(dplyr)
+midwest %>% select(where(is.character)) %>%
+  glimpse()
+```
+The categorical variables in the dataset are county, state, and category. 
+
+3) What is the Native American population of Bond County Illinois?
+
+```{r}
+d <- filter(midwest, county == "BOND", state == "IL")
+population_amind <- d["popamerindian"]
+population_amind$popamerindian
+```
+
+The Native American population of Bond County, Illinois is 35%.
+
+4) What does the variable "percollege" stand for or represent?
+
+The variable "percollege" represents the percent of the people in the county who are college educated. 
+
+5) Use and show R code to produce a histogram for the variable per college.
+```{r}
+# in Base R
+hist(midwest$percollege)
+```
+```{r}
+# in ggplot2
+ggplot(data = midwest) +
+  geom_histogram(mapping = aes(x=percollege), color = "blue") +
+  ggtitle("Count of Percent College Educated")
+```
+
+6) How would you characterize the distribution of the data modeled by your histogram; skewed left, skewed right, or normal?
+
+Since the histogram is skewed to the right, the mean is greater than the median. 
+
+7) What is the relationship between the mean and the median?
+
+Since the histogram is skewed to the right, the mean is greater than the median.
+
+8)Use and show R code to produce a boxplot for the variable percollege.
+
+```{r}
+#base r
+boxplot(midwest$percollege)
+```
+
+```{r}
+# using ggplot2
+ggplot(data = midwest) +
+  geom_boxplot(mapping = aes(x=percollege), fill = "green", outlier.color = "blue")
+```
+ 9) Does the boxplot indicate that the data has outliers?
+ 
+ Yes, there are a number of plot points that are outside the "whiskers" of the boxplot.
+ 
+ 10) Use the boxplot or the summary function to find the five number summary  (Minimnm, 1st Quartile,  Median, 3rd Quartile, Maximum)
+ 
+```{r}
+summary(midwest$percollege)
+```
+ 
+ The summary for "percollege" is as follows:
+  Minimum: 7.336
+  1QR: 14.114
+  Median: 16.798
+  3QR: 20.550
+  Maximum: 48.079
+  
+11) Use and show R code to find the standard deviation of the data.
+  This is the SAMPLE Standard Deviation according to the R standard library
+```{r}
+sd(midwest$percollege)
+```
+  This is the population standard deviation as specified by users in stackoverflow: https://stackoverflow.com/questions/21495649/how-to-calculate-standard-deviation-in-r/21495709#21495709
+```{r}
+sqrt(mean(midwest$percollege^2) - mean(midwest$percollege)^2)
+```
+
+
+12) Use and show R code to find the mean of the data.
+```{r}
+mean(midwest$percollege)
+```
+
+13) Use and show R code to find the IQR.
+```{r}
+IQR(midwest$percollege)
+```
+
+14) Use and show R code to produce a stem and leaf plot.
+```{r}
+stem(midwest$percollege)
+```
+
+15) In three or four sentences explain the relationship that you see between the stem and leaf plot and the histogram. 
+
+  Both plots are giving us an idea of the distribution of college graduates in each midwestern county. You can easily see in both plots that the distribution of subjects that are college graduates in these counties sampled largely fall between 20% and 10%. In fact, the stem a leaf plot along with the histogram both appear to be of a similar, if not the same, shape (should you flip the axis of either plot to match the other). 
+
+16) Use and show Tidyverse R code to produce a scatter plot for the variables percollege and poppovertyknown. Use percollege as the independent variable and poppovertyknown as the dependent variable.
+```{r}
+ggplot(data = midwest) +
+  geom_point(mapping = aes(x=percollege, y=poppovertyknown, color=state)) +
+  geom_smooth(mapping = aes(x=percollege, y=poppovertyknown, color=state), method=lm, se=FALSE)
+```
+17) In four or five sentences, explain what relationship exists between the variables as indicated by the scatter plot.  Is there an extreme outlier in the scatter plot?
+
+In the scatter plot between percent of college graduates and the population with a known poverty status within a midwest county, it appears that there is a slight positive relationship between the independent variable (college grads) and the dependent variable (the known number of people under poverty status). Judging from the plot, there are a few outliers including a more major outlier with a data point originating from a county in Illinois. 

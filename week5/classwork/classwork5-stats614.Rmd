@@ -1,0 +1,111 @@
+---
+title: "classwork5-STAT614"
+author: "Jared 'Jay' Klein"
+date: "9/28/2021"
+output: word_document
+---
+
+
+```{r}
+?prop.test
+```
+
+1a)
+```{r}
+sample_size = 200
+sample_prop = .07*sample_size
+
+prop.test(x=sample_prop, n=sample_size, conf.level = .95 )
+```
+ 0.04025812 0.11705481
+
+
+1b)
+```{r}
+sample_size = 500
+sample_prop = .07*sample_size
+
+prop.test(x=sample_prop, n=sample_size, conf.level = .95 )
+```
+ 0.04991248 0.09693342
+
+
+1c)
+```{r}
+sample_size = 800
+sample_prop = .07*sample_size
+
+prop.test(x=sample_prop, n=sample_size, conf.level = .95 )
+```
+ 0.05374762 0.09050618
+
+
+1d)
+```{r}
+sample_size = 1100
+sample_prop = .07*sample_size
+
+prop.test(x=sample_prop, n=sample_size, conf.level = .95 )
+
+1.95/sqrt(61/640000) 
+```
+0.05596248 0.08712002
+
+1e)
+
+As we increased hte sample size  of students for the study, it appears as if the confidence intervals are becoming more and more narrow. That is, the difference between the upper bound and lower bound of the interval is coming closer and closer together. 
+
+1f) 
+
+As I alluded to in 1e, it appears that as the sample size of students increases each time, the width or difference between the upper bound and lower bound of the confidence interval becomes more and more narrow. It seems that as this happens (the sample size going up) we get a more accurate idea of the pi-hat we used in class (population proportion?). 
+
+2a)
+```{r}
+# Compute Standard Error
+se <- 4/sqrt(27)
+
+# Get T distribution factor and set y_bar which is the given sample mean
+#t <- 2.056
+#t <- qt(.95, 26, lower.tail = TRUE)
+alpha <- (1-.95)/2
+
+t <- qt(p=alpha, df=26, lower.tail = FALSE)
+
+
+y_bar <- 42
+
+# Create your boundries, multiply Standard Error by distribution factor
+upper_bound <- 42 + (t*se)
+lower_bound <- 42 - (t*se)
+
+library(glue)
+
+glue("({lower_bound}, {upper_bound}), with T-dist value as {t}")
+```
+(40.4176527003631, 43.5823472996369), with T-dist value as 2.05552943864287
+
+
+2b)
+```{r}
+# Compute Standard Error
+se <- 4/sqrt(27)
+
+# Get T distribution factor and set y_bar which is the given sample mean
+
+alpha = (1-.9)/2
+t <- qt(p=alpha, df=26, lower.tail = FALSE)
+y_bar <- 42
+
+# Create your boundries, multiply Standard Error by distribution factor
+upper_bound <- 42 + (t*se)
+lower_bound <- 42 - (t*se)
+
+library(glue)
+
+glue("({lower_bound}, {upper_bound}), with T-dist value as {t}")
+```
+(40.6870147131898, 43.3129852868102), with T-dist value as 1.70561791975927
+
+3)
+
+FALSE, this is not guaranteed.  

@@ -1,0 +1,135 @@
+---
+title: "hw6-stats612"
+author: "Jared 'Jay' Klein"
+date: "10/3/2021"
+output: word_document
+---
+
+1) When a 2016 research study asked whether there is solid evidence of global warming, 87% of the liberals said yes whereas 25% of the conservatives said yes.  For conservatives if n = 400, find an interpret a 99% confidence interval.  (Use and show R code to produce the confidence interval)      
+
+```{r}
+?prop.test
+```
+
+```{r}
+sample_size = 400
+sample_prop = .25*sample_size
+
+prop.test(x=sample_prop, n=sample_size, conf.level = .99)
+```
+
+
+2) When a survey asked whether the government should impose strict laws to discourage people from smoking, a 95% confidence interval for the population proportion responding yes was ( .85,  .89).  Would a 99% confidence interval be wider or, shorter?   Why ?
+
+* A 99% confidence interval would be wider than a 95% interval due to the required larger sample size. There is a larger chance the truth (or true value) will be captured in a confidence interval that is 99% than in a 95% interval where there is a 5% chance we will not discover the true value (p?). In order to have this higher confidence with 99% we need a wider interval to capture more possible true values. 
+
+3)  A sample of 15 Calculus test scores has a mean of 77 and a standard deviation of 5.  As demonstrated in the notes, use a step by step approach to obtain a 99% confidence interval for the mean of the population.  SHOW ALL OF YOUR WORK  (Do not use R for this problem)
+
+```{r}
+se <- 5/sqrt(15)
+
+alpha <- (1-.99)/2
+
+t <- qt(p=alpha, df=14, lower.tail = FALSE)
+
+
+y_bar <- 77
+
+# Create your boundries, multiply Standard Error by distribution factor
+upper_bound <- 77 + (t*se)
+lower_bound <- 77 - (t*se)
+
+library(glue)
+
+glue("({lower_bound}, {upper_bound}), with T-dist value as {t}")
+```
+
+
+4)  Data was analyzed from a study that compared therapies for anorexia.  For 17 girls who received the family therapy, the changes in weight during the study were:
+11, 11, 6, 9, 14, -3, 0, 7, 22, -5, -4, 13, 13, 9, 4, 6, 11
+
+```{r}
+girls_sample <- c(11, 11, 6, 9, 14, -3, 0, 7, 22, -5, -4, 13, 13,  9, 4, 6, 11)
+```
+
+a)  Verify that y(bar) = 7.29,  s=7.18,  and se = 1.74  (you may use and show R code to verify these results or you may produce the results using a direct non-software approach)
+
+```{r}
+y_bar <- mean(girls_sample)
+s <- sd(girls_sample)
+se <- s/sqrt(17)
+
+y_bar
+s
+se
+```
+
+b)  To use the t-distribution, explain why df = 16 and for a 95% confidence interval and why you would obtain a t score of 2.120
+
+```{r}
+alpha <- (1-.95)/2
+
+round(qt(p=alpha, df=16, lower.tail = FALSE), digits=3)
+```
+You subtract the confidence interval from one and divide by 2 to get the alpha. From there, you take the sample minus 1 (n-1). Using these two numbers, you can read a t-distribution chart to get the t-distribution number. Should be the one specified above. 
+
+
+c)  Verify that the 95% confidence interval for the population mean change in weight µ for this therapy is (3.6 ,  11.0).  (you may use and show R code to verify this confidence interval or you may produce the results using a direct non-software approach)
+Interpret your interval
+
+```{r}
+t.test(girls_sample, conf.level = .95)
+```
+
+We can be 95% confident that the population mean change in weight for the therapy will be between 3.6 and 11. 
+
+
+5)  Based on responses of 1467 subjects in General Social Surveys, a 95% confidence interval for the mean number of close friends equals (6.8, 8.0). Which of the following interpretations is (are) correct?
+a)  We can be 95% confident that y(bar) is between 6.8 and 8.0.
+*b)  We can be 95% confident that µ is between 6.8 and 8.0.
+c)  Ninety five percent of the values of y = number of close friends(for the sample)  are between 6.8 and 8.0.
+d)  If random samples of size 1467 were repeatedly selected, then 95% of the time y(bar) would fall between 6.8 and 8.0.
+*e)  If random samples of size 1467 were repeatedly selected, then 95% of the time µ would fall between 6.8 and 8.0.
+
+
+In chapter 5 of your text book, the following formula is given to find the random sample size  n ;
+n  =   δ2(z/M)2
+where z =1.96 for a confidence level of .95
+Refer to your textbook for instructions on how to use this formula and study the examples that your book provides for finding the sample size n. 
+Solve the following problem
+6) An estimate is needed of the mean acreage of farms in Region X.  The estimate should be within 100 acres with probability .95.  A preliminary study suggests that 400 acres is a reasonable guess for the standard deviation of the farm size.
+a)  How large a sample of farms is required?
+
+```{r}
+z_score <- 1.96
+se_sigma <- 400
+
+d <- 100
+
+z_score^2 * se_sigma^2/ d^2
+```
+
+```{r}
+n = (400^2)*(1.95/100)^2
+```
+
+n = (400^2)(1.95/100)^2
+
+n = 61
+
+b)  A random sample is selected of the size found in part a.  The sample has a standard deviation of 800 acres, rather than 400.  What is the margin of error for a 95% confidence interval for the mean farm size?
+
+61 = (800^2)(1.95/M)^2
+
+61/640000 = (1.95/M)^2
+
+sqrt(61/640000) = 1.95/M
+
+sqrt(61/640000)/1.95 = 1/M
+
+1.95/sqrt(61/640000) = M
+
+M = 199.735
+
+
+

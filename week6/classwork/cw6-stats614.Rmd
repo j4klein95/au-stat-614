@@ -1,0 +1,82 @@
+---
+title: "classwork6"
+author: "Jared 'Jay' Klein"
+date: "10/12/2021"
+output: word_document
+---
+
+1) The “fun size” of a Snickers bar is supposed to weigh 20 grams.  Because the 
+penalty for selling candy bars under their advertised weight is severe, the 
+manufacturer calibrates the machine so that the mean weight is 20.1 grams.  
+The quality-control engineer at M&M – Mars,  the Snickers manufacturer, is 
+concerned about the calibration.  He obtains a random sample of 11 candy bars, 
+weights them, and obtains the data given below:
+
+19.6  20.66  19.56  19.98  20.65  19.61  20.55  20.36  21.02  21.50  19.74
+
+The engineer conducts the one-sample t test at the α = 0.01 level of 
+significance. The engineer is trying to determine if the machine delivers a 
+weight of 20.1 or not. Assume that the standard conditions for executing a 
+t test are satisfied
+
+a) State the appropriate null hypothesis and alternative hypothesis
+  
+  Null Hypothesis - The established belief is that the machine  weighing 
+  Snickers candy bars weigh delivers a weight of 20 grams. 
+  
+  Alt. Hypothesis - the hypothesis is that the machine is instead calibrated to
+  deliver candy bars over 20.1 grams. Ha: mew > 20.1 
+  
+b)  Show and use R code to create a vector for the data set.
+```{r}
+candy_vector <- c(19.6,20.66,19.56,19.98,20.65,19.61,20.55,20.36,21.02,21.50,19.74)
+```
+
+c)  Show and use R code to run the one sample t test.
+```{r}
+t.test(candy_vector, mu=20.1, alternative="greater", conf.level = .95)
+```
+
+d)  What is the t statistic, the p value, and the 95% confidence interval
+  
+  t-stat: 0.99028
+  df: 10
+  p-value: 0.1727
+
+e)  Should the null hypothesis be rejected?  Why or Why not?
+
+No, the p-value is greater than .05 and we thus fail to reject the null hypothesis
+
+
+2) Use and show R code to execute a significance test for proportions for each case. 
+Identify the p value and determine if you should reject or fail to reject the 
+null hypothesis
+   a)  Ho :  π = .6   vs   Ho :  π < .6 ,    n = 250 , x = 124 ,       α = .01
+```{r}
+prop.test(x = 124, n = 250, p = .6, alternative="less", conf.level = .95, correct = FALSE)
+```
+   
+   The null hypothesis can be rejected where p-value = 0.0003946 < .05.
+   
+   b)  Ho :  π = .45   vs   Ho :  π  > .45 ,    n = 68 , x = 30 ,      α = .05
+```{r}
+prop.test(x = 30, n = 68, p = .45, alternative="greater", conf.level = .95, correct = FALSE)
+```
+   
+   The null hypothesis cannot be rejected because p-value = 0.558 > .05.
+   
+   c)   Ho :  π = .9   vs   Ho :  π  ≠ .p ,       n = 500 , x = 440 ,   α = .05
+```{r}
+prop.test(x = 440, n = 500, p = .9, alternative="two.sided", conf.level = .95, correct = FALSE)
+```
+
+The null hypothesis cannot be rejected because p-value = 0.136 > .05. 
+
+3)  *True or False   
+A Type One Error is committed when the null hypothesis is rejected when it is 
+in fact true.
+
+This is TRUE. 
+
+
+

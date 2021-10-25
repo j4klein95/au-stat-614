@@ -1,0 +1,33 @@
+---
+title: "cw7-stats614"
+author: "Jared 'Jay' Klein"
+date: "10/20/2021"
+output: word_document
+---
+
+```{r}
+f_students <- c(.588, .652, .442, .293, .340, .636, .391, .367, .377, .481, .613, .274,
+ .646, .403, .377, .380, .403, .617, .434, .443)
+
+m_students <- c(.375, .256, .427, .654, .563, .405, .374, .465, .402, .373, .488, .337, .224, .477, .655)
+```
+
+```{r}
+t.test(f_students, m_students, mu = 0, alternative = "two.sided", var.equal = TRUE, conf.level = .95)
+```
+```{r}
+0.4578500-0.4316667 
+```
+
+
+Null Hypothesis -> Ho: mew_f = mew_m -> there is no significant difference between
+  the reaction time of females (mew_f) and males (mew_m).
+  
+Alternative Hypothesis -> Ha: mew_f ≠ mew_m -> there is a significant difference between
+  the reaction time of females (mew_f) and males (mew_m).
+  
+p-value -> 0.5389; t-stat -> 0.62095; conf-interval -> -0.05960489, 0.11197155
+
+Since the p-value is > the significance level of .05 we fail to reject the null hypothesis. 
+Also, since the difference of Ho (mew_f - mew_m) falls within the confidence interval, we have 
+additional justification for not rejecting the null hypothesis. 

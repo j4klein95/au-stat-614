@@ -1,0 +1,86 @@
+---
+title: "hw7-stats614"
+author: "Jared 'Jay' Klein"
+date: "10/22/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+
+1)
+```{r}
+thrifty <- c(21.81,29.89,17.90,27.98,24.61,21.96,20.90,47.75,33.81,33.49)
+```
+```{r}
+hertz <- c(18.99,48.99,19.99,35.99,25.60,22.99,19.99,36.99,26.99,20.99)
+```
+
+1a) 
+
+Ho: mu_thrifty <≠ mu_hertz (Thrifty is NOT cheaper or less than Hertz rentals).
+Ha: mu_thrifty < mu_hertz (Thrifty is cheaper or less than Hertz rentals).
+
+b) 
+
+```{r}
+t.test(thrifty, hertz, mu = 0, alternative = "less", var.equal = TRUE, conf.level = .99)
+```
+
+t-stat = 0.061984; p-value = 0.5244; 95% conf interval = (-inf, 7.504)
+
+c) P-value is > the significance value of .01 therefore we fail to reject the null
+hypothesis. 
+
+2)
+
+a) 
+Ho: mew_depressed_executives = mew_depressed_nonexecs (there is no significant difference 
+between depressed executives and depressed nonexecutives.)
+
+Ha: mew_dpressed_executives ≠ mew_depressed_nonexecs (there is a significant difference between
+the means of depressed executives and depressed nonexecutives.)
+
+b) Since the mean of depressed executives subtracted from the mean of depressed non-execs does not fall within
+the confidence interval (ie. 5.9 - 2.1 -> 3.8 for conf interval 1.5-3.2) then we CAN REJECT the null hypothesis.
+
+c) Having a p-value that is close to or is 0 (is that possible?) indicates that there is high significance or likelihood that
+the alternative hypothesis (Ha) is correct which means we can reject the null hypothesis. Also 0 < .05 significance level indicating
+a high probability that Ho can be rejected. 
+
+3) 
+
+a)
+```{r}
+qnorm(p=.01, mean=0, sd=1, lower.tail = TRUE)
+```
+lf if z<= -2.326348
+
+Z = (Y_bar - 3)/ (1.5/sqrt(25))
+-2.3263 = (y_bar -3)/ 0.3
+-0.6978 + 3 = y_bar
+Y_bar = 2.30211
+
+
+
+b)
+The probability of type2 error would decrease as the sample size goes from n=25 to 50. Large sample sizes will keep type errors low. 
+
+c) 
+Normalize: (2.30211 - 4)/(1.5/sqrt(25)) = -5.6596
+
+```{r}
+pnorm(-5.6596, mean = 0, sd=1, lower.tail = F)
+```
+
+d)
+1 - 1 = 0; 
+
+The power of a test is the the chance that our test will come to the correct conclusion when rejecting a null hypothesis that is not true. 
+
+
+
+

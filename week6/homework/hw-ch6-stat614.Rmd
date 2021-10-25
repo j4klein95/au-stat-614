@@ -1,0 +1,130 @@
+---
+title: "hw-ch6-STAT614"
+author: "Jared 'Jay' Klein and Khairiya Eidan"
+date: "10/14/2021"
+output: word_document
+---
+
+#########################
+1)
+
+a) Null Hypothesis - Ho : μ = 501 (null hypothesis)
+     
+    Alternative Hypothesis - Ha : μ < 501 (alternative hypothesis)
+
+
+b) 
+t = (485 - 501)/se , se = 116/sqrt(100)
+se = 11.5 -> t = (485 - 501)/11.6
+
+df = n - 1 -> df = 99
+
+t = -1.379 df = 99
+
+c) 
+P-value = (left tail) 0.0855
+
+d) 0.0855 > 0.05, we fail to reject the null hypothesis
+##########################
+
+2)
+```{r}
+library(tidyverse)
+mtcars
+```
+
+a) qsec is the quarter mile time of the cars within the dataset. 
+
+b)
+```{r}
+qqnorm(mtcars$qsec)
+```
+
+c)
+```{r}
+hist(mtcars$qsec)
+```
+d) The quartile plot of qsec is normal because it has its plots in a reltiavely straight diagonal line. 
+The histogram is also normal as it is bell-hsaped and relatively symmetrical. 
+The data is showed NOT to be skewed in either direction meaning that the mean is 
+about to or equal to the median. 
+
+e) 
+
+Null Hypothesis - the qsec indicator for the population of vehicles is equal to 16.
+Ho = 16
+
+Alternative Hypothesis - the qsec indicator for the population of vehicles is greater than 16.
+Ha > 16
+
+```{r}
+t.test(mtcars$qsec, mu = 16, alternative = "greater", conf.level = .95)
+```
+
+Since the outcome of the test outputs a P-value < .05 consistent with the confidence level, we can reject the null hypothesis (Ho).
+
+If we ran the tests however many times on samples of the dataset we can be 95% confident that we would get the same conclusion each time (ie. that the qsec indicator for the population of vehicles is greater than 16). 
+
+#########################
+3)
+
+a) 
+```{r}
+prop.test(x=75, n=150, p=.45, alternative = "greater", correct = FALSE)
+```
+P-value = 0.1092
+
+b)
+```{r}
+prop.test(x=75, n=150, p=.45, alternative = "less", correct = FALSE)
+```
+p-value = 0.8908
+
+c)
+```{r}
+prop.test(x=75, n=150, p=.45, alternative = "two.sided", correct = FALSE)
+```
+p-value = 0.2184
+
+d) No
+
+###########################
+4) 
+
+Null hypothesis - 65 percent of adults in the United States reported that math skills were very critical or important to their job. 
+Ho = 65
+
+Alternative Hypothesis - the number of adults in the United States that report math skills as critical or important to their job increased.
+Ha > 65
+
+```{r}
+prop.test(x=297, n=480, p=.65, alternative = "greater", conf.level = .95, correct = FALSE)
+```
+
+P-value = 0.9244, the 95% confidence interval is .5817 - 1.0000, z-stat is 1.435409
+
+We do not have enough evidence to reject the null hypothesis as the p-value result is more than 0.05
+##########################
+5)
+#Ho : μ = 2000
+#Ha : μ ≠  2000
+
+y(bar) = 1500, n = 10, s = 100
+
+Ho: mew = 2000
+
+t = (1500 - 2000)/se, se = 100/sqrt(10)
+    (1500 - 2000)/31.62
+    
+t = -15.81
+(right tail) = .9999
+One-tailed probability (left tail): 	0.00000004
+Two-tailed probability: 	0.00000007
+
+It is highly likely that the mean income for graduate managers  is less than or(and?) not equal to $2000 a month. 
+We reject the null hypothesis, based on the p-value is appears that the mean is less than $2000. 
+
+B) The P-value for a less than 2000 Ha is 0.0000004, this is less than 0.05 which suggests that the null hypothesis can be rejected and the alternative hypothesis accepted. 
+
+C) The P-value for a more than 2000 Ha is 0.999999, this is more than 0.05 which suggests that the null hypothesis cannot be rejected. 
+

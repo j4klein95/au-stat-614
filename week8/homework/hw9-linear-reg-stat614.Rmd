@@ -1,0 +1,163 @@
+---
+title: "hw9-stats614"
+author: "Jared 'Jay' Klein"
+date: "10/29/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+
+1)
+
+```{r}
+tribble(~Year, ~RateofReturnSP500, ~RateofReturnofGE,
+                    1996, .203, .402,
+                    1997, .310, .510,
+                    1998, .267, .410,
+                    1999, .195, .536,
+                    2000, -.101, -.060,
+                    2001, -.130, -.151,
+                    2002, -.234, -.377,
+                    2003, .264, .308,
+                    2004, .090, .207,
+                    2005, .030, -.014,
+                    2006, .128, .093,
+                    2007, -.035, .027,
+                    2008, -.385, -.593,
+                    2009, .235, -.102,
+                    2010, .067, .053) -> index_
+```
+
+
+1a)
+```{r}
+ggplot(data = index_) +
+  geom_point(mapping = aes(x = RateofReturnSP500, y = RateofReturnofGE))
+```
+
+1b)
+Based on the pattern in the above plot I believe that the possibility of a lin
+-ear relationship is strong. 
+
+1c)
+```{r}
+cor(index_$RateofReturnSP500, index_$RateofReturnofGE)
+```
+
+1d)
+The output coefficent of .8841227 indicates that ther is likely at least a moderate
+positive correlation. 
+
+1e)
+
+```{r}
+summary(lm(formula = RateofReturnofGE~RateofReturnSP500, data=index_))
+```
+
+1f)
+
+Regression equation -> -0.001227  + 1.402002RateOfReturnOfSP500 = RateOfReturnOfGE
+
+1g)
+
+For every increase in the rate of return of GE, the rate of return of the SP500 increases by 1.402002.
+
+1h) 
+
+```{r}
+ggplot(data = index_) +
+  geom_point(mapping = aes(x = RateofReturnSP500, y = RateofReturnofGE)) +
+  geom_smooth(method = lm, mapping = aes(x = RateofReturnSP500, y = RateofReturnofGE), se=FALSE)
+
+```
+ 
+ 
+1i)
+
+.-0.001227  + 1.402002RateOfReturnOfSP500 = RateOfReturnOfGE
+
+.-0.001227  + 1.402002*1.78 = GE
+-0.001227 + 2.495564 = GE
+2.494337 = GE
+
+1ii)
+
+observed-SP500 -> .267
+
+.-0.001227  + 1.402002RateOfReturnOfSP500 = expectedRateOfReturnOfGE
+
+.-0.001227  + 1.402002*.410 = expectedGE
+
+0.5735938
+
+Observed - Expected
+
+.267 - 0.5735938 = 0.3065938
+
+The residual of .306 is above the average. 
+
+1k)
+
+```{r}
+summary(lm(RateofReturnSP500 ~ RateofReturnofGE, data=index_))
+```
+
+
+The proportion of the variability of our dependent variable explained by the linear
+regression model is .78 (multiple r-squared statistic) which indicates that model
+does a fairly good job of answer the regression question.
+
+2a)
+
+  i) (20 GDP, 90 Cell)
+  ii) (36 GDP, 42 Cell)
+  
+2b)
+
+Observedy -> 45.1
+
+Expectedy = -.13 + 2.62(34.3)
+Expectedy = 89.7
+
+45.1 - 89.7 = -44.6
+
+The residual is -44.6 which means that the observered value is below the average
+predicted by the linear model. 
+
+2c)
+
+The correlation is positive, given the prediction equation in the previous question.
+As you increase GDP (x), Cell use increases (Y). Judging from the plot, the relationship
+is moderate rather than strong. 
+
+3a)
+
+Question: As Gii increases, Fertility will increase as well. Is there a positive 
+linear relationship between the two variables?
+
+3b)
+
+```{r}
+gii <- c(0.42, 0.81, 0.11, 0.06, 0.07, 0.44, 0.14, 0.19, 0.26, 0.32)
+fertility <- c(2.8, 2.2, 1.9, 1.4, 1.8, 1.8, 1.6, 1.9, 1.9, 1.7)
+
+cor(gii, fertility)
+
+summary(lm(fertility ~ gii))
+```
+
+prediction equation -> 1.6435 + 0.9095*gii = fertility
+
+3c) 
+
+Our multiple r-squared value is 0.3036.
+
+3d)
+
+The results of these tests and outputs seems to indicate there is NOT a linear relationship
+between GDP and Fertility. At best, there may be a weak negative relationship, but more work
+is required to even support that theory. 

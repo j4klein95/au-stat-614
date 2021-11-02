@@ -1,0 +1,71 @@
+---
+title: "cw8-regression-stat614"
+author: "Jared 'Jay' Klein"
+date: "10/26/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+
+?mtcars
+```
+
+1) Generate the scatter plot for horsepower hp  vs  weight wt.  Let hp = y and let wt = x.  Use the ggplot (tidyverse) method
+
+```{r}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = wt , y = hp)) + 
+  geom_smooth(method = lm, mapping = aes(x = wt , y = hp), se = FALSE)
+  
+```
+
+
+2) Rate the linear relationship between the variables as weak, moderate, strong,  or very strong base on the scatter plot.  Use and show R code to confirm your answer.
+
+```{r}
+cor(mtcars$wt, mtcars$hp)
+```
+
+It seems that there is a moderate linear relationship between horsepower and weight given the corellation coefficient of .66 rounded up. 
+
+3) Use and show R code that will produce the linear model.  Write the linear model and interpret the slope.
+
+```{r}
+lm(wt ~ hp, data=mtcars) -> x
+
+x
+```
+
+4) Use the formula and the procedure in the notes to find the residual for the observational weight value of 5.424  Is your observational weight above average or below average. Show all of your work.
+
+```{r}
+mtcars%>%
+  select(wt, hp)%>%
+  filter(wt == 5.424)
+
+1.838247 + (0.009401*215)
+5.424 - 3.859462
+```
+Wt -> 5.424 hp -> 215
+
+linear_equation -> wt = 1.838247 + 0.009401hp
+
+expected wt = 3.859462, actual = 5.424
+
+residual is 1.564538
+
+
+As modeled in the notes, use the summary command and generate the appropriate output     table to answer problems 5 and 6.
+```{r}
+summary(x)
+```
+
+5) Find the p value of your slope. Interpret the p value (two or three sentences)
+
+The p value is incredibly small compared to our significance value. Therefore, we can reject the null hypothesis. 
+
+6) Find the value in your summary output table that measures how well your model is explaining the variation in the dependent variable.
+
+The multiple R-squared statistic indicates how well a model explains variations in the dependent variable. The resulting score of .4339 is not good and indicates that the linear equation may not explain the relationship between weight and horsepower very well. Essentially, the independent variable does not explain variation in the dependent. 

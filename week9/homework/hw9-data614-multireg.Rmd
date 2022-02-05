@@ -1,0 +1,100 @@
+---
+title: "hw9-data614-mreg"
+author: "Jared 'Jay' Klein and Khairiya Eidan"
+date: "11/9/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+tribble(~EngineSize,  ~CurbWeight,  ~Horsepower,  ~MilesperGallon,
+                       2.4,         3289,                          177,               24,
+                          2.4,         3263,                          158,               25,
+                          2.5,         3230,                          170,               24,
+                          3.5,         3580,                          272,               22,
+                          2.8,         3175,                          255,               18,
+                          3.5,         3643,                          263,               22,
+                          3.5,         3497,                          306,               20,
+                          3.0,         3340,                          230,               21,
+                          3.6,         3861,                          263,               19,
+                          2.4,         3287,                          173,               24,
+                          3.3,         3629,                          234,               21,
+                          2.5,         3270,                          170,               22,
+                          3.5,         3292,                          270,               22
+) -> V
+
+```
+1)  Use and show R code that will produce a correlation matrix.
+
+```{r}
+cor(V)
+```
+
+
+2) Indicate if the correlation matrix shows multicollinearity problems with pairs of
+     explanatory variables.  The variable Miles per Gallon is the response variable
+
+It seems possible that Horsepower and EngineSize could be inverserly linear to 
+  Miles per Gallon. CurbWeight does not look like a likely explanatory variable
+  for MPG. 
+
+3) Indicate the explanatory variable(s) that the response variable is strongly correlated with.
+
+It seems possible that Horsepower and EngineSize could be inverserly linear to 
+  Miles per Gallon. CurbWeight does not look like a likely explanatory variable
+  for MPG. 
+
+4) Use and show R code that will produce a full multiple regression model, that uses all 
+    explanatory variables. Write the full model that shows the coefficients for all explanatory
+    variables and the intercept.
+    
+```{r}
+lm(MilesperGallon ~ EngineSize + Horsepower + CurbWeight, V) -> lmodel_all
+
+lmodel_all
+```
+
+    
+5) Use and show R code that will produce all important summary statistics for your model.
+
+```{r}
+summary(lmodel_all)
+```
+
+6) Which explanatory variable(s) is/are significant at the level of .05?
+
+Horsepower
+
+7)  Use your book or an internet source and describe the difference between R2 and adjusted R2.  (Three or four sentences)
+
+The R2 output lets you know he proportion of the variability that is explained by the 
+full model regression equation. Meanwhile, the adjusted R2 value is he proportion of the variability that is explained by the full model regression equation, only using explanatory variables that have significant impact on the dependent variable.
+
+8) What is the proportion of the variability in Milespergallon that is explained by the full model regression equation?
+
+The proportion of the variability in Milespergallon that is explained by the 
+full model regression equation is 0.6257.
+
+9) What is the proportion of the variability in Milespergallon that is explained by the full model regression equation, only using explanatory variables that have significant impact on the dependent variable.
+
+The proportion of the variability in Milespergallon that is explained by the full model regression equation 0.5009, only using explanatory variables that have significant impact on the dependent variable
+
+10)  Use and show R code that produces a model without the explanatory variable with the    highest p value. Write the new model that indicates the response variable, the explanatory coefficients and the intercept.
+
+```{r}
+lm(MilesperGallon ~ EngineSize + Horsepower, V) -> lmodel_wo
+lmodel_wo
+summary(lmodel_wo)
+```
+
+
+11) Explain why the null hypothesis that the population coefficient for Engine Size is equal to zero is not to be rejected.
+
+Becasue the p-value for EngineSize is 0.3410 (which is greater than .05), we fail to reject the null hypothesis. 
+
+
+ 12)  Which model, the one with three explanatory variables or the one with two explanatory variables is the better model for predicting Miles per gallon?  Justify your answer in three of four sentences.
+ 
+ The model with the two explanatory variables os a better model for predicting Miles per Gallon because the overall model seems to be more signficant baased on having a lower p-value (0.013 instead of 0.026)
+
+

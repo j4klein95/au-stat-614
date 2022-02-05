@@ -1,0 +1,93 @@
+---
+title: "cw9-stat614"
+author: "Jared 'Jay' Klein"
+date: "11/2/2021"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+wut_ <- tribble(~HEIGHT,	~WEIGHT,	~HEADCIRCUMFERENCE,
+30,	339,	47,
+26.25,	267,	42,
+25,	289,	43,
+27,	332,	44.5,
+27.5,	272,	44,
+24.5,	214,	40.5,
+27.75,	311,	44,
+25,	259,	41.5,
+28,	298,	46,
+27.25,	288,	44,
+26,	277,	44,
+27.25,	292,	44.5,
+27,	302,	42.5,
+28.25,	336,	44.5
+)
+```
+
+1)  Use and show R code to construct a coefficient matrix. Is there multicollinearity involving any of the explanatory variables?  If so, what variables are of concern? (Head Circumference is the response variable)
+```{r}
+cor(wut_)
+```
+
+Weight and Height appear to have high collinearity with Head Circumference.
+
+2) Use and show R code to produce the full multi regression model where the response variable is Head Circumference and the two explanatory variables are Height and Weight.
+```{r}
+lm(HEADCIRCUMFERENCE ~ HEIGHT + WEIGHT, data = wut_) -> head_c_model
+head_c_model
+```
+
+
+3) Use and show R code to produce the summary table for your full model.  Indicate the variable whose p value is not significant at the level of .05.  And also indicate what proportion of the variability in Head Circumference is explained by your model.
+```{r}
+summary(head_c_model)
+```
+
+It seems like like WEIGHT is not significant at a level of .05 with regards to 
+head circumference. The proportion of variability in head circumfrence that is
+explained by the model is 0.7826.
+
+
+4) Use and show R code that will produce a linear regression model with the explanatory variable of no significance removed.
+```{r}
+lm(formula = HEADCIRCUMFERENCE ~ HEIGHT, data = wut_) -> head_c_model_no_weight
+head_c_model_no_weight
+```
+
+A.	Interpret the slope of this model
+    
+    hEADCIRCUMFERENCE = 16.382 + 1.0157(height)
+
+    For every 1 value (component/measure) of height, the circumference of the head
+    increases by 1.0157. 
+    
+    
+B.	What proportion of the variability of the response variable is not explained by the linear regression model? (SHOW ALL OF YOUR WORK)
+```{r}
+summary(head_c_model_no_weight)
+```
+The proportion of the variability of the head circumference of the child not explained
+by the linear regression model is around 0.7584 or about 76%. 
+
+C.	Find the correlation coefficient r  for the linear model.
+```{r}
+cor(wut_$HEADCIRCUMFERENCE, wut_$HEIGHT)
+```
+
+
+D.	Does r suggest a linear relationship that is weak, moderate, strong, or very strong?
+
+    R Suggests a strong relationship between headcircumference and height
+
+E.	What is the value of the standard error for the explanatory variable?  Explain what it means in two or sentences.
+
+  Standard error lets us know how accurate a sample distribution reflects a population.
+  In this case, the std error of the explanatory variable HEIGHT is .1655 which indicates
+  high significance. 

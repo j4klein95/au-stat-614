@@ -1,0 +1,66 @@
+---
+title: "stat614-anova-2"
+author: "Jared 'Jay' Klein and Khairiya Eidan"
+date: "12/5/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+1)  What two factors have a possible impact on the cost of an oil change?
+*Location and Service Center*
+  
+2) Prepare the data for R input. Initial rows and columns have been done for you. Complete the table.
+```{r}
+tribble(~ServiceCenter, ~Location,  ~OilChangeCharge,
+        "Specialty Chain", "Chicago",     19.95,
+        "Specialty Chain", "Chicago",     27.95,
+        "Specialty Chain", "Chicago",     23.99,
+        "Specialty Chain", "Bolingbrook", 23.99,
+        "Specialty Chain", "Bolingbrook", 29.95,
+        "Specialty Chain", "Bolingbrook", 28.99,
+        "Specialty Chain", "Peoria",      24.99,
+        "Specialty Chain", "Peoria",      26.99,
+        "Specialty Chain", "Peoria",      19.95,
+        "General Service", "Chicago",     21.99,
+        "General Service", "Chicago",     26.95,
+        "General Service", "Chicago",     24.95,
+        "General Service", "Bolingbrook", 22.45,
+        "General Service", "Bolingbrook", 29.95,
+        "General Service", "Bolingbrook", 28.13,
+        "General Service", "Peoria",      22.99,
+        "General Service", "Peoria",      24.95,
+        "General Service", "Peoria",      27.99
+) -> oil
+oil  
+```
+
+3)  Use and show R code to formally convert the character variables to factors.
+```{r}
+as.factor(oil$ServiceCenter) -> oil$ServiceCenter
+as.factor(oil$Location) -> oil$Location
+str(oil)
+```
+
+4) Use and show R code to produce a Two Way ANOVA Table
+```{r}
+aov(OilChangeCharge ~ ServiceCenter + Location + ServiceCenter:Location, 
+    data = oil)-> yawn
+yawn
+summary(yawn)
+```
+
+5) Does your ANOVA table indicate that there is interaction for the explanatory factor variables?  Justify your answer.
+*The anova table does nto indicate interaction for our terms given the high p-value (.854) associated with the interaction. At a significance level of 0.05 we cannot reject the null hypothesis.*
+
+6) Use and show R code to produce an interaction plot.  Provide an interpretation of your interaction plot.
+```{r}
+interaction.plot(oil$ServiceCenter, oil$Location, oil$OilChangeCharge, xlab = "ServiceCenter",
+                 ylab = "OilChangeCharge")
+```
+*The plot suggests a low interaction between location and service center since the lines are wack.*
+
+7) Should the null hypothesis be rejected for your individual factors?  Justify your answers.
+**

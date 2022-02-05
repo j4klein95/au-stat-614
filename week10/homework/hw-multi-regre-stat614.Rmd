@@ -1,0 +1,54 @@
+---
+title: "hw-multi-regre-stat614"
+author: "Jared 'Jay' Klein"
+date: "11/16/2021"
+output: word_document
+---
+
+1) Run the following R code
+```{r}
+library(tidyverse)              
+mtcars
+```
+
+2) In the mtcars data table, define or describe each variable abbreviation(one sentence for each variable).
+
+*Mpg is miles travelled per gallon; disp is engine displacement; hp is horsepower; wt is vehicle weight.*
+
+3) Use and show R code to determine if their exists multicollinearity problems among any of the explanatory variables.
+
+```{r}
+mtcars %>% 
+  select(mpg, disp, hp, wt) %>% 
+  cor()
+```
+
+
+4) Use and show R code to generate a full regression model that features mpg as the response variable. The explanatory variables are hp, wt, and disp.
+
+```{r}
+lm(mpg ~ hp + disp + wt, mtcars) 
+```
+
+5) Use and show R code to build a 95% confidence interval and a 90% confidence interval for the true coefficient for wt.  (These are two separate problems. Show all of your work. Provide and interpretation for each interval)
+6)  It has been determined that there is interaction involving the variables hp and wt.  
+a) Produce a full model that includes the interaction term hp : wt. 
+
+```{r}
+model_2 <- lm(mpg ~ hp + disp + wt + hp:wt, mtcars) 
+```
+
+b) Show and use R code to determine if the interaction term is significant at the .05 level.
+```{r}
+summary(model_2)
+```
+
+
+c)  What value in your output tables indicates the percentage of variability of the response variable that is explained by the model using only explanatory variables that have significant impact on the response variable?
+
+*86.83% which indicates to us that the model is relatively good at predicting mpg.*
+
+d) Also for this interactive model, explain why or why not the null hypothesis (Ho :: all 
+explanatory coefficients = 0) should be rejected.
+
+*With an extremely low p-value  the model means we can reject the null hypothesis.*

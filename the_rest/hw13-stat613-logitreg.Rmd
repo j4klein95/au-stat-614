@@ -1,0 +1,71 @@
+---
+title: "hw13-stat614"
+author: "Jared 'Jay' Klein, Khairiya Eidan"
+date: "12/9/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+1. **What is the probability that a student will pass an exam if they study 5.3 hours preparing for it?**
+
+```{r}
+hours <- c(0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 1.75, 2.00, 2.25, 2.50, 2.75, 3.00, 3.25, 3.50, 4.00, 4.25, 4.50, 4.75, 5.00, 5.50)
+pass <-  c(0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1)
+df <- as_tibble(hours)
+df$pass <- pass
+df
+```
+
+```{r}
+df$pass <- as.factor(df$pass)
+df
+```
+```{r}
+glm(pass ~ value, family = "binomial",  data = df) -> logisticps
+logisticps
+
+summary(logisticps)
+```
+```{r}
+predict.glm(logisticps, newdata = data.frame(value = 5.3), type = "response")
+```
+
+ln(P/(1 - P) = -4.0777 + 1.5046hours  
+             = -4.0777 + 1.5046(5.3)  
+
+ln(P/(1 - P) = 3.89668
+e^           = e^(3.89668)  
+
+  (P/(1 - P) = 49.2387
+           P = 49.2387(1 - P)
+           P = 49.2387 - 49.2387P   
+
+P + 49.2387P = 49.2387  
+
+50.2387P = 49.2387
+       P = 49.2387/50.2387
+       P = 0.980095  
+
+*The probability of someone studying for 5.3 hours and passing the test in is about 98%.*
+
+2. **How does the number of hours spent studying affect the probability of the student passing the exam?**  
+
+*The table shows the number of hours each student spent studying, and whether they passed (1) or failed (0). The graph indicates that as the number of hours increase, the probability of a student passing the test increases.*
+
+
+```{r}
+new_dat <- data.frame(value=seq(min(df$value), max(df$value), len=100))
+new_dat$pass <- predict.glm(logisticps, newdata = new_dat, type = "response")
+```
+```{r}
+ggplot(new_dat, aes(x=value, y=pass)) +
+  geom_point() +
+  geom_smooth(method = "glm", 
+    method.args = list(family = "binomial"), 
+    se = FALSE)
+```
+
+

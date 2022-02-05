@@ -161,3 +161,18 @@ Our multiple r-squared value is 0.3036.
 The results of these tests and outputs seems to indicate there is NOT a linear relationship
 between GDP and Fertility. At best, there may be a weak negative relationship, but more work
 is required to even support that theory. 
+```{r}
+type_check <- function(x){
+  if (is.numeric(x)) {
+    print("This is a number")
+  }
+  else {
+    print("this is not a number")
+  }
+}
+```
+```{r}
+type_check(12)
+type_check("gah")
+```
+

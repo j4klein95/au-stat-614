@@ -1,0 +1,63 @@
+---
+title: "hw12-stat614"
+author: "Jared 'Jay' Klein and Khairiya Eidan"
+date: "12/5/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+alaska <- c(5.41, 5.39, 4.90, 5.14, 4.80,5.24)
+florida <- c(4.87,5.18,4.40,5.12,4.89,5.06)
+texas <- c(5.46, 6.29, 5.57, 5.15,5.45,5.30)
+```
+
+1a)  State the appropriate null and alternative hypothesis for the one-way ANOVA procedure.
+
+**ho: The mean ph for Alaska, Florida, and Texas are all the same.**
+
+**ha: At least one mean ph for Alaska, Florida, and Texas are different from the others**
+
+1b) Use the R code illustrated in class to produce the ANOVA table.
+```{r}
+combined_states <- data.frame(cbind(alaska, florida, texas))
+stacked_states <- stack(combined_states)
+
+aov(values~ind, data = stacked_states) -> Are
+Are
+summary(Are)
+```
+
+1c)  Which value is SST (Sum of Squares Treatment) in the produced ANOVA table?
+**1.167**
+
+1d)  What is the F statistic and the p value?
+**F-state -> 5.811**
+**P-value -> 0.0135**
+
+1e)  State your decision to reject or fail to reject the null hypothesis.  Justify your answer.
+**We reject the null hypothesis partly because it is highly unlikely three populations have a mean that is the same, but also because the p-value of 0.0135 is significant at a 0.05 level.**
+
+2a) Missing in the table is the value for Mean Square Residuals.  This is also called Means Square Errors in 
+some ANOVA output tables.  Find the Mean Square Residuals.
+**MSE = SSE/(n-k)**
+**MSE = 121.75/9**
+```{r}
+121.75/9
+```
+
+
+2b)  Find the F value (F statistic)
+**F-stat = MST/MSE**
+**F-stat = 27.58/13.52778**
+```{r}
+27.58/13.52778
+```
+
+
+2c)  Using the output shown in the ANOVA table, decide if the null hypothesis that all population means are 
+equal should be rejected at the .05 level of significance.    Justify your answer. 
+**The null hypothesis cannot be rejected given taht the p-value is not significant at a level of 0.05.**

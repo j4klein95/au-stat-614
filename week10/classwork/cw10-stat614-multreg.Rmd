@@ -1,0 +1,66 @@
+---
+title: "cw10-stats614"
+author: "Jared 'Jay' Klein"
+date: "11/9/2021"
+output: word_document
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+tribble(~WorkExperience, ~LevelofEducation, ~AnnualIncomeThou,
+        21,                      6,               31.7,
+        14,                      3,               17.9,
+        4,                       8,               22.7,
+        16,                      8,               63.1,
+        12,                      4,               33,
+        20,                      4,               41.4,
+        25,                      1,               20.7,
+        8,                       3,               14.6,
+        24,                      12,              97.3,
+        28,                       9,              72.1,
+        4,                       11,              49.1,
+        15,                       4,              52
+)->X
+X
+```
+
+1)  Use and show R code to produce a full Multiple Regression Model. The 
+response variable is Annual Income.  Also produce the summary table
+
+```{r}
+lm(AnnualIncomeThou~LevelofEducation + WorkExperience, X) ->dat_modello
+
+summary(dat_modello)
+```
+
+
+2)  Use and show R code to produce a full Multiple Regression Model that 
+includes and interaction term. Also produce the summary table
+
+```{r}
+lm(AnnualIncomeThou~LevelofEducation + WorkExperience + LevelofEducation:WorkExperience, X) ->dat_modello_due
+
+summary(dat_modello_due)
+```
+
+
+
+3)  Using summary indicators from both models determine which model you 
+would use to predict Annual Income.  Justify your answer.  Your analysis should 
+have 6 to 7 sentences using and comparing significance of pvalues, R2, adusted R2, 
+variable standard errors, residual standard errors and the overall significance of 
+both models.
+
+I would choose to use the initial multiple linear regression model (titled "dat_modello")
+as the model that would best predict Annual income. This is based on a number of factors.
+For example, the p-value for the coefficients in this model are both significant to at least
+0.05 significance level and includes a general p-value for the whole model that is closer
+to zero. While the R2 and adjusted R2 values are compariable (off by minute values), the
+significance attached to the independent variables put the first model over the top. Furthermore,
+the high degree of freedom on the first model (2-9 compared to 3-8) generally indicates 
+a larger sample size and thus more power to accept or reject the null hypothesis. 
+
